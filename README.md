@@ -30,6 +30,26 @@ The app should have a navigation bar and contain a button for each main section 
 - Activity (First example image)
 - Profile (Second example image)
 
+You should:
+
+- Use React Native.
+- Demonstrate handling data through API calls.
+- Allow the user to click from feed to details
+- Alter the design as needed to leave your mark
+
+### Resources
+
+**API Endpoint - URL**
+
+`GET`
+https://run.mocky.io/v3/e27b6e75-6ac5-4b8a-9b16-6c4397cb325a
+
+**Figma Mock Designs**
+
+https://www.figma.com/file/LmI6At0j0sysya3kWtbyzl/Mattr---Test?type=design&node-id=0%3A1&mode=design&t=p7DaQxFV78G7PRbR-1
+
+---
+
 ## Activity Screen
 
 ---
@@ -85,6 +105,8 @@ This screen should contain the following information:
 The only things that are different from the "Other Profiles Screen" will be the removal of the heart button as the users can't match with themselves as well as the presence of the navigation bar at the bottom as it is a main section of the app.
 
 ## Mocking data
+
+---
 
 We provide you with a mock data API which you can use to lay down the functionality of the app.
 
@@ -149,10 +171,3 @@ https://run.mocky.io/v3/e27b6e75-6ac5-4b8a-9b16-6c4397cb325a
     "created_at": "2024-03-08T06:15:26.698Z"
   },
 ```
-
-You should:
-
-- Use React Native.
-- Demonstrate handling data through API calls.
-- Allow the user to click from feed to details
-- Alter the design as needed to leave your mark
