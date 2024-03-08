@@ -119,6 +119,8 @@ https://run.mocky.io/v3/e27b6e75-6ac5-4b8a-9b16-6c4397cb325a
 
 **User Object Example from the API**
 
+`Note: "dob" stands of Date of Birth. Use this date value to calculate the age of a user`
+
 ```
  {
     "id": 1,
