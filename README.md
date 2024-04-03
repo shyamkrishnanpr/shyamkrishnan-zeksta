@@ -117,6 +117,13 @@ The endpoint will provide you with a list of 50 generated users that follow the 
 `GET`
 https://run.mocky.io/v3/e27b6e75-6ac5-4b8a-9b16-6c4397cb325a
 
+Note if the above URL is down or not working feel free to use this secondary URL:
+
+`GET`
+https://ad5fd43ff3494e53ae90dfd8c03a23f9.api.mockbin.io/
+
+If you are unable to access either of the URLs above there is also a `data.json` file in this project which will replicate the mock API data response. Feel free to use that file as the API response instead to render out the data for the app.
+
 **User Object Example from the API**
 
 `Note: "dob" stands of Date of Birth. Use this date value to calculate the age of a user`
