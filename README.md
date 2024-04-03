@@ -44,6 +44,15 @@ You should:
 `GET`
 https://run.mocky.io/v3/e27b6e75-6ac5-4b8a-9b16-6c4397cb325a
 
+OR
+
+`GET`
+https://ad5fd43ff3494e53ae90dfd8c03a23f9.api.mockbin.io/
+
+OR
+
+Use `data.json` file as a mock api data file for your app if none if the above are working for you.
+
 **Figma Mock Designs**
 
 https://www.figma.com/file/LmI6At0j0sysya3kWtbyzl/Mattr---Test?type=design&node-id=0%3A1&mode=design&t=p7DaQxFV78G7PRbR-1
