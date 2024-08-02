@@ -8,7 +8,8 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+
+import { calculateAge } from '../util/helpers';
 
 const {width} = Dimensions.get('window');
 
@@ -36,7 +37,7 @@ const OtherProfile = ({route, navigation}) => {
 
       <View style={styles.details}>
         <Text style={styles.name}>
-          {data.first_name} {data.last_name}
+          {data.first_name} {data.last_name}{', '}{calculateAge(data.dob)}
         </Text>
         <Text style={styles.city}>
           {data.location.city}, {data.location.country}
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#555',
+    marginBottom: 5,
   },
   city: {
     fontSize: 18,

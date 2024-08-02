@@ -49,13 +49,13 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    fontWeight: '400',
+    fontWeight: '200',
     color: '#555',
   },
   city: {
     fontSize: 14,
     color: '#555',
-    fontWeight:'800',
+    fontWeight: '800',
     marginBottom: 10,
   },
   button: {
