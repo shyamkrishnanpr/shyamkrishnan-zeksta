@@ -12,6 +12,7 @@ import {
 const {width} = Dimensions.get('window');
 import Card from '../components/Card';
 import data from '../data.json';
+import {calculateAge} from '../util/helpers';
 
 const Home = ({navigation, route}) => {
   const {selectedGender, selectedAgeRange, selectedSortOption} =
@@ -21,7 +22,7 @@ const Home = ({navigation, route}) => {
 
   useEffect(() => {
     filterData();
-  }, [selectedGender, selectedSortOption, data]);
+  }, [selectedGender, selectedSortOption, selectedAgeRange, data]);
 
   const filterData = () => {
     let filtered = [...data];
@@ -41,8 +42,19 @@ const Home = ({navigation, route}) => {
       });
     }
 
+    if (selectedAgeRange) {
+      const [minAge, maxAge] = selectedAgeRange.split('-').map(Number);
+
+      filtered = filtered.filter(item => {
+        const age = calculateAge(item.dob);
+        return age >= minAge && age <= maxAge;
+      });
+    }
+
     setFilteredData(filtered);
   };
+
+  const handleRefresh = () => {};
 
   const handleViewProfile = data => {
     navigation.navigate('OtherProfile', {data});
@@ -51,7 +63,9 @@ const Home = ({navigation, route}) => {
   const renderItem = ({item}) => (
     <Card
       image={item.photos[0].path}
-      name={item.first_name + ' ' + item.last_name}
+      name={
+        item.first_name + ' ' + item.last_name + ', ' + calculateAge(item.dob)
+      }
       city={item.location.city + ',' + item.location.country}
       onViewProfile={() => handleViewProfile(item)}
     />
@@ -69,11 +83,11 @@ const Home = ({navigation, route}) => {
           <Text style={{color: '#CE1694'}}>Filter</Text>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', marginBottom: 10}}>
         <Text style={styles.title}>Daily Connections</Text>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleRefresh}>
         <Text style={styles.buttonText}>Refresh</Text>
       </TouchableOpacity>
       <FlatList
