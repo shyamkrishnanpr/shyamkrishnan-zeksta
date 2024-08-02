@@ -14,14 +14,16 @@ import Card from '../components/Card';
 import data from '../data.json';
 
 const Home = ({navigation}) => {
-  const handleViewProfile = id => {};
+  const handleViewProfile = data => {
+    navigation.navigate('/otherProfile', {data});
+  };
 
   const renderItem = ({item}) => (
     <Card
       image={item.photos[0].path}
       name={item.first_name + ' ' + item.last_name}
       city={item.location.city + ',' + item.location.country}
-      onViewProfile={() => handleViewProfile(item.id)}
+      onViewProfile={() => handleViewProfile(item)}
     />
   );
   return (
