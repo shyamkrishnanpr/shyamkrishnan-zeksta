@@ -7,20 +7,27 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 
 const {width} = Dimensions.get('window');
 
 const FilterScreen = ({navigation}) => {
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedAgeRange, setSelectedAgeRange] = useState(null);
+  const [selectedSortOption, setSelectedSortOption] = useState(null);
 
   const handleClearAll = () => {
     setSelectedGender(null);
     setSelectedAgeRange(null);
+    setSelectedSortOption(null);
   };
 
   const handleApplyFilter = () => {
-    console.log('Filters applied!');
+    navigation.navigate('Activity', {
+      selectedGender,
+      selectedAgeRange,
+      selectedSortOption,
+    });
   };
 
   const handleGenderSelect = gender => {
@@ -29,6 +36,10 @@ const FilterScreen = ({navigation}) => {
 
   const handleAgeRangeSelect = range => {
     setSelectedAgeRange(range);
+  };
+
+  const handleSortOptionSelect = option => {
+    setSelectedSortOption(option);
   };
 
   return (
@@ -52,7 +63,7 @@ const FilterScreen = ({navigation}) => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Gender</Text>
             <View style={styles.optionsContainer}>
-              {['Male', 'Female'].map(gender => (
+              {['male', 'female'].map(gender => (
                 <TouchableOpacity
                   key={gender}
                   style={[
@@ -101,25 +112,33 @@ const FilterScreen = ({navigation}) => {
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Sort By</Text>
-            <View style={styles.placeholderContainer}>
-              <Text style={styles.placeholderText}>Score</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={selectedSortOption}
+                onValueChange={itemValue => handleSortOptionSelect(itemValue)}
+                style={styles.picker}>
+                <Picker.Item label="Select Sorting Option" value={null} />
+                <Picker.Item label="Score" value="Score" />
+                <Picker.Item label="Date Joined" value="Date Joined" />
+              </Picker>
             </View>
           </View>
-          <View style={styles.separator} />
 
           <View style={styles.scoreContainer}>
             <View
-              style={{
-                backgroundColor: '#CE1694',
-
-                padding: 10,
-                borderRadius: 10,
-                width: width / 1.2,
-              }}>
+              style={[
+                styles.highlightedOption,
+                selectedSortOption === 'Score' && styles.selectedHighlight,
+              ]}>
               <Text style={styles.scoreTitle}>Score</Text>
             </View>
 
-            <View style={{margin: 10}}>
+            <View
+              style={[
+                styles.highlightedOption,
+                selectedSortOption === 'Date Joined' &&
+                  styles.selectedHighlight,
+              ]}>
               <Text style={styles.scoreText}>Date Joined</Text>
             </View>
           </View>
@@ -138,7 +157,7 @@ const FilterScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: 'white',
     padding: 20,
   },
   header: {
@@ -194,11 +213,17 @@ const styles = StyleSheet.create({
   selectedOptionText: {
     color: 'white',
   },
-  dropdown: {
+  pickerContainer: {
     backgroundColor: '#fff',
     borderColor: '#C5C6CC',
     borderRadius: 12,
-    marginBottom: 20,
+    borderWidth: 1,
+    marginVertical: 10,
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+    color: 'black',
   },
   applyButton: {
     borderRadius: 12,
@@ -225,27 +250,27 @@ const styles = StyleSheet.create({
     borderColor: '#C5C6CC',
     borderWidth: 1,
   },
+  highlightedOption: {
+    padding: 10,
+    borderRadius: 10,
+    margin: 5,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  selectedHighlight: {
+    backgroundColor: '#CE1694',
+    borderColor: '#CE1694',
+    color: 'white',
+  },
   scoreTitle: {
     fontSize: 14,
     fontWeight: '400',
-    color: 'white',
+    color: 'black',
   },
-
   scoreText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#71727A',
-  },
-  placeholderContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 16,
-    borderColor: '#C5C6CC',
-    borderWidth: 1,
-  },
-  placeholderText: {
-    color: '#888',
+    color: 'black',
   },
 });
 

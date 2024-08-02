@@ -13,7 +13,37 @@ const {width} = Dimensions.get('window');
 import Card from '../components/Card';
 import data from '../data.json';
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
+  const {selectedGender, selectedAgeRange, selectedSortOption} =
+    route.params || {};
+
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    filterData();
+  }, [selectedGender, selectedSortOption, data]);
+
+  const filterData = () => {
+    let filtered = [...data];
+
+    if (selectedGender) {
+      filtered = filtered.filter(item => item.gender === selectedGender);
+    }
+
+    if (selectedSortOption) {
+      filtered.sort((a, b) => {
+        if (selectedSortOption === 'Score') {
+          return b.score - a.score;
+        } else if (selectedSortOption === 'Date Joined') {
+          return new Date(b.created_at) - new Date(a.created_at);
+        }
+        return 0;
+      });
+    }
+
+    setFilteredData(filtered);
+  };
+
   const handleViewProfile = data => {
     navigation.navigate('OtherProfile', {data});
   };
@@ -47,7 +77,7 @@ const Home = ({navigation}) => {
         <Text style={styles.buttonText}>Refresh</Text>
       </TouchableOpacity>
       <FlatList
-        data={data}
+        data={filteredData}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
