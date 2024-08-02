@@ -15,7 +15,7 @@ import data from '../data.json';
 
 const Home = ({navigation}) => {
   const handleViewProfile = data => {
-    navigation.navigate('/otherProfile', {data});
+    navigation.navigate('OtherProfile', {data});
   };
 
   const renderItem = ({item}) => (
@@ -35,7 +35,7 @@ const Home = ({navigation}) => {
           marginLeft: 300,
           marginTop: 10,
         }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
           <Text style={{color: '#CE1694'}}>Filter</Text>
         </TouchableOpacity>
       </View>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '800',
     color: '#1F2024',
-    marginVertical: 10,
+    marginVertical: 0,
   },
 });
 
