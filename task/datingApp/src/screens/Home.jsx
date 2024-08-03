@@ -50,11 +50,18 @@ const Home = ({navigation, route}) => {
         return age >= minAge && age <= maxAge;
       });
     }
-
-    setFilteredData(filtered);
+    selectRandomItems(filtered);
   };
 
-  const handleRefresh = () => {};
+  const selectRandomItems = data => {
+    const shuffledData = data.sort(() => 0.5 - Math.random());
+    const selected = shuffledData.slice(0, 5);
+    setFilteredData(selected);
+  };
+
+  const handleRefresh = () => {
+    filterData();
+  };
 
   const handleViewProfile = data => {
     navigation.navigate('OtherProfile', {data});
