@@ -8,13 +8,46 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import data from '../data.json';
+import { calculateAge } from '../util/helpers';
 
 const {width} = Dimensions.get('window');
 
 const UserProfile = ({navigation}) => {
-  const datas = data[0];
+  const datas = {
+    first_name: 'John',
+    last_name: 'Doe',
+    location: {
+      city: 'New York',
+      country: 'USA',
+    },
+    dob: "01/10/1992",
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    photos: [
+      {
+        path: 'https://picsum.photos/id/1018/900/600',
+      },
+      {
+        path: 'https://picsum.photos/id/1019/900/600',
+      },
+      {
+        path: 'https://picsum.photos/id/1020/900/600',
+      },
+    ],
+    interests: [
+      {
+        id: 1,
+        name: 'Photography',
+      },
+      {
+        id: 2,
+        name: 'Cooking',
+      },
+      {
+        id: 3,
+        name: 'Traveling',
+      },
+    ],
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -37,7 +70,7 @@ const UserProfile = ({navigation}) => {
 
       <View style={styles.details}>
         <Text style={styles.name}>
-          {datas.first_name} {data.last_name}
+          {datas.first_name} {datas.last_name}{', '}{calculateAge(datas.dob)}
         </Text>
         <Text style={styles.city}>
           {datas.location.city}, {datas.location.country}
