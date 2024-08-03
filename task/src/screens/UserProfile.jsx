@@ -8,20 +8,52 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import HeartIcon from '../components/Icons/HeartIcon';
-
-import {calculateAge} from '../util/helpers';
+import { calculateAge } from '../util/helpers';
 
 const {width} = Dimensions.get('window');
 
-const OtherProfile = ({route, navigation}) => {
-  const {data} = route.params;
+const UserProfile = ({navigation}) => {
+  const datas = {
+    first_name: 'John',
+    last_name: 'Doe',
+    location: {
+      city: 'New York',
+      country: 'USA',
+    },
+    dob: "01/10/1992",
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    photos: [
+      {
+        path: 'https://picsum.photos/id/1018/900/600',
+      },
+      {
+        path: 'https://picsum.photos/id/1019/900/600',
+      },
+      {
+        path: 'https://picsum.photos/id/1020/900/600',
+      },
+    ],
+    interests: [
+      {
+        id: 1,
+        name: 'Photography',
+      },
+      {
+        id: 2,
+        name: 'Cooking',
+      },
+      {
+        id: 3,
+        name: 'Traveling',
+      },
+    ],
+  };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <ScrollView horizontal style={styles.imageGallery}>
-          {data.photos.map((photo, index) => (
+          {datas.photos.map((photo, index) => (
             <Image
               key={index}
               source={{uri: photo.path}}
@@ -38,17 +70,13 @@ const OtherProfile = ({route, navigation}) => {
 
       <View style={styles.details}>
         <Text style={styles.name}>
-          {data.first_name} {data.last_name}
-          {', '}
-          {calculateAge(data.dob)}
+          {datas.first_name} {datas.last_name}{', '}{calculateAge(datas.dob)}
         </Text>
-
         <Text style={styles.city}>
-          {data.location.city}, {data.location.country}
+          {datas.location.city}, {datas.location.country}
         </Text>
-
         <Text style={styles.description}>
-          {data.bio || 'No description available.'}
+          {datas.bio || 'No description available.'}
         </Text>
 
         <Text
@@ -62,7 +90,7 @@ const OtherProfile = ({route, navigation}) => {
         </Text>
 
         <View style={styles.interestsContainer}>
-          {data.interests.map(interest => (
+          {datas.interests.map(interest => (
             <TouchableOpacity key={interest.id} style={styles.interestButton}>
               <Text style={styles.interestText}>{interest.name}</Text>
             </TouchableOpacity>
@@ -97,7 +125,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#555',
-    marginBottom: 5,
   },
   city: {
     fontSize: 18,
@@ -154,4 +181,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OtherProfile;
+export default UserProfile;
